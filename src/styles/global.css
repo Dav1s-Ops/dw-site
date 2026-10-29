@@ -1,1 +1,62 @@
 @import "tailwindcss";
+
+@import "@fontsource-variable/unbounded";
+@import "@fontsource-variable/open-sans";
+@import "@fontsource/b612-mono/400.css";
+@import "@fontsource/b612-mono/700.css";
+
+@theme {
+    --font-display: "Unbounded Variable", sans-serif;
+    --font-sans: "Open Sans Variable", sans-serif;
+    --font-mono: "B612 Mono", monospace;
+    --color-ink-0: #000000;
+    --color-ink-1: #121212;
+    --color-ink-2: #1a1a1a;
+    --color-gray: #363636;
+    --color-gray-light: #cecdcc;
+    --color-smoke: #f5f5f5;
+
+    /* Electrooo */
+    --color-electro-blue: #30c2f6;    /* Frontend */
+    --color-electro-yellow: #f0aa05;  /* Backend  */
+    --color-electro-green: #0dae5e;   /* Fullstack + primary accent */
+    --color-electro-red: #f42053;     /* DevOps   */
+    --color-electro-purple: #6027ff;  /* Music    */
+    --color-electro-orange: #f68c30;  /* Personal */
+    --color-electro-pink: #c225e0;    /* h5 only  */
+
+    /* THE GLOWZ */
+    --shadow-glow-green: 0 10px 100px -40px var(--color-electro-green);
+    --shadow-glow-blue: 0 0 60px -10px var(--color-electro-blue);
+    --shadow-glow-yellow: 0 0 60px -10px var(--color-electro-yellow);
+    --shadow-glow-red: 0 0 60px -10px var(--color-electro-red);
+    --shadow-glow-purple: 0 0 60px -10px var(--color-electro-purple);
+    --shadow-glow-orange: 0 0 60px -10px var(--color-electro-orange);
+
+}
+
+/* The black gradients, as utilities: class="bg-ink-radial" etc. */
+@utility bg-ink-radial { background: radial-gradient(50% 50% at 50% 50%, #000 0%, #121212 100%); }        /* post cards, title bars */
+@utility bg-ink-panel { background: radial-gradient(50% 50% at 50% 50%, #1a1a1a 0%, #121212 100%); }     /* post body, toasts */
+@utility bg-ink-spot { background: radial-gradient(62.86% 62.86% at 50% 0%, #000 0%, #121212 100%); }  /* top-lit sections */
+@utility bg-ink-fade { background: linear-gradient(180deg, #000 0%, #121212 100%); }                    /* page background */
+@utility bg-ink-rise { background: linear-gradient(0deg, #000 0%, #121212 100%); }                      /* buttons, dropdowns */
+
+@layer base {
+    html { color-scheme: dark; }
+    body {
+        min-height: 100dvh;
+        background-color: var(--color-ink-1);
+        font-family: var(--font-sans);
+        color: var(--color-smoke);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+    body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: -10;
+        background: linear-gradient(180deg, #000 0%, #121212 100%);
+    }
+}
