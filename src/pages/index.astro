@@ -1,5 +1,6 @@
 ---
 import '@/styles/global.css';
+import { Button } from '@/components/ui/button';
 ---
 <html lang="en">
   <head>
@@ -11,5 +12,10 @@ import '@/styles/global.css';
     <h1 class="font-display text-4xl font-semibold">Davis <span class="text-electro-green">Weimer</span></h1>
     <div class="mt-6 rounded-xl border border-gray bg-ink-radial p-6 shadow-glow-green">bg-ink-radial card</div>
     <span class="mt-4 inline-block rounded-full bg-electro-blue px-3 py-1 font-display text-xs text-ink-0">Frontend</span>
+    <div class="mt-6 flex gap-3">
+      <Button>Default</Button>
+      <Button variant="outline">Outline</Button>
+      <Button variant="electro" size="touch">Electro</Button>
+    </div>
   </body>
 </html>
