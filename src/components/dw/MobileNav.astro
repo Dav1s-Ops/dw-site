@@ -1,0 +1,16 @@
+---
+// Zero-JS mobile menu using the native <details> element. Swap for shadcn <Sheet> if you want a slide-in drawer.
+interface Props { items: { href: string; label: string }[] }
+const { items } = Astro.props;
+---
+<details class="group relative md:hidden">
+  <summary class="flex h-11 w-11 cursor-pointer list-none items-center justify-center rounded-full border border-gray bg-ink-rise [&::-webkit-details-marker]:hidden" aria-label="Menu">
+    <span class="font-display text-lg leading-none group-open:hidden">≡</span>
+    <span class="hidden font-display text-lg leading-none group-open:inline">×</span>
+  </summary>
+  <ul class="absolute right-0 z-50 mt-2 w-48 overflow-hidden rounded-xl border border-gray bg-ink-panel shadow-glow-green">
+    {items.map((item) => (
+      <li><a href={item.href} class="flex h-12 items-center px-5 font-display text-sm hover:bg-gray">{item.label}</a></li>
+    ))}
+  </ul>
+</details>

@@ -12,6 +12,8 @@ export default defineConfig({
   adapter: cloudflare({imageService: 'compile'}),
   image: { layout: 'constrained'},
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss()],
+    optimizeDeps: { include: ['nanostores', '@nanostores/react'] },
+    ssr: { optimizeDeps: { include: ['nanostores', '@nanostores/react'] } },
   },
 });
