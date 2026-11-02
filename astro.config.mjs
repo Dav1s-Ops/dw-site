@@ -11,6 +11,8 @@ export default defineConfig({
   integrations: [react(), sitemap()],
   adapter: cloudflare({imageService: 'compile'}),
   image: { layout: 'constrained'},
+  // No Astro.session usage; stops the adapter injecting an unconfigured SESSION KV binding
+  session: false,
   vite: {
     plugins: [tailwindcss()],
     optimizeDeps: { include: ['nanostores', '@nanostores/react'] },
