@@ -1,0 +1,24 @@
+---
+import Base from '@/layouts/Base.astro';
+import { Button } from '@/components/ui/button';
+import { SoundButton } from '@/components/dw/SoundButton';
+import { CATEGORIES } from '@/lib/categories';
+const gradients = ['bg-ink-radial', 'bg-ink-panel', 'bg-ink-spot', 'bg-ink-fade', 'bg-ink-rise'];
+---
+<Base title="Styleguide">
+  <h1 class="font-display text-3xl font-semibold">Styleguide</h1>
+  <section class="grid w-full grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+    {Object.values(CATEGORIES).map((c) => (
+      <div class={`flex h-20 items-end rounded-xl p-3 font-display text-xs text-ink-0 ${c.bg}`}>{c.label}</div>
+    ))}
+  </section>
+  <section class="grid w-full grid-cols-1 gap-3 sm:grid-cols-5">
+    {gradients.map((g) => <div class={`flex h-24 items-end rounded-xl border border-gray p-3 font-mono text-[11px] ${g}`}>{g}</div>)}
+  </section>
+  <section class="flex flex-wrap gap-3">
+    <Button>Default</Button>
+    <Button variant="outline">Outline</Button>
+    <Button variant="electro">Electro</Button>
+    <SoundButton client:visible variant="electro" size="touch">With sound</SoundButton>
+  </section>
+</Base>

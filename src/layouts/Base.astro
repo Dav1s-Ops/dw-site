@@ -1,0 +1,57 @@
+---
+import '@/styles/global.css';
+import { ClientRouter } from 'astro:transitions';
+import { SoundToggle } from '@/components/dw/SoundToggle';
+import MobileNav from '@/components/dw/MobileNav.astro';
+
+interface Props { title: string; description?: string }
+const { title, description = 'Davis Weimer — fullstack developer. Portfolio and code blog.' } = Astro.props;
+const nav = [
+  { href: '/', label: 'Home' },
+  { href: '/work', label: 'Work' },
+  { href: '/projects', label: 'Projects' },
+  { href: '/blog', label: 'Blog' },
+  { href: '/contact', label: 'Contact' },
+];
+const path = Astro.url.pathname;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title} · DW</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={new URL(path, Astro.site)} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <ClientRouter />
+  </head>
+  <body class="flex flex-col items-center px-4 pt-4 md:px-8">
+    <header class="flex w-full max-w-5xl items-center justify-between gap-4 pb-6">
+      <a href="/" class="inline-flex h-11 items-center font-display text-xl font-semibold tracking-tight">DW<span class="text-electro-green">.</span></a>
+      <nav aria-label="Main" class="hidden md:block">
+        <ul class="flex gap-1">
+          {nav.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                aria-current={path === item.href || (item.href !== '/' && path.startsWith(item.href)) ? 'page' : undefined}
+                class="inline-flex h-11 items-center rounded-full border border-transparent px-4 font-display text-xs font-normal text-smoke transition hover:border-gray aria-[current=page]:border-electro-green aria-[current=page]:bg-ink-rise"
+              >{item.label}</a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+      <div class="flex items-center gap-2">
+        <SoundToggle client:idle />
+        <MobileNav items={nav} />
+      </div>
+    </header>
+    <main class="flex w-full max-w-5xl flex-1 flex-col items-center gap-8">
+      <slot />
+    </main>
+    <footer class="mt-16 w-full max-w-5xl border-t border-gray py-8 text-center font-display text-xs font-light text-gray-light">
+      © {new Date().getFullYear()} Davis Weimer
+    </footer>
+  </body>
+</html>
