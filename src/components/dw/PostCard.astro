@@ -1,0 +1,23 @@
+---
+import type { Post } from '@/lib/posts';
+import { formatDate } from '@/lib/posts';
+import { CATEGORIES } from '@/lib/categories';
+
+interface Props { post: Post }
+const { post } = Astro.props;
+const { title, description, pubDate, categories } = post.data;
+---
+<article class="@container rounded-xl border border-gray bg-ink-radial p-5 transition hover:-translate-y-0.5 hover:brightness-110">
+  <a href={`/blog/${post.id}`} class="flex flex-col gap-3 @md:flex-row @md:items-center @md:justify-between">
+    <div class="flex flex-col gap-1">
+      <h3 class="font-display text-lg font-medium text-smoke @md:text-xl">{title}</h3>
+      {description && <p class="text-sm font-light leading-relaxed text-gray-light">{description}</p>}
+    </div>
+    <div class="flex shrink-0 flex-wrap items-center gap-2">
+      <time datetime={pubDate.toISOString()} class="font-display text-xs font-light text-electro-green">{formatDate(pubDate)}</time>
+      {categories.map((c) => (
+        <span class={`rounded-full px-2.5 py-0.5 font-display text-[11px] text-ink-0 ${CATEGORIES[c].bg}`}>{CATEGORIES[c].label}</span>
+      ))}
+    </div>
+  </a>
+</article>
