@@ -12,3 +12,5 @@ This is my **first** post. Here's a [link to Astro](https://astro.build).
 const greeting: string = 'hi';
 console.log(greeting);
 ```
+
+![Look at this boyo.](./images/Subject%203.png)
