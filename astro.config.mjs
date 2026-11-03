@@ -4,6 +4,8 @@ import react from '@astrojs/react';
 import tailwindcss from '@tailwindcss/vite';
 import cloudflare from '@astrojs/cloudflare';
 import sitemap from '@astrojs/sitemap';
+import { unified } from "@astrojs/markdown-remark";
+import rehypeExternalLinks from "rehype-external-links";
 
 // https://astro.build/config
 export default defineConfig({
@@ -17,5 +19,12 @@ export default defineConfig({
     plugins: [tailwindcss()],
     optimizeDeps: { include: ['nanostores', '@nanostores/react'] },
     ssr: { optimizeDeps: { include: ['nanostores', '@nanostores/react'] } },
+  },
+    markdown: {
+    processor: unified({
+      rehypePlugins: [
+        [rehypeExternalLinks, { target: '_blank', rel: ['noopener', 'noreferrer'] }],
+      ],
+    }),
   },
 });
