@@ -1,0 +1,24 @@
+---
+import type { GetStaticPaths } from 'astro';
+import Base from '@/layouts/Base.astro';
+import CategoryBar from '@/components/dw/CategoryBar.astro';
+import PostCard from '@/components/dw/PostCard.astro';
+import { getPosts } from '@/lib/posts';
+import { CATEGORY_KEYS, CATEGORIES } from '@/lib/categories';
+
+export const getStaticPaths = (async () => {
+  const posts = await getPosts();
+  return CATEGORY_KEYS.map((category) => ({
+    params: { category },
+    props: { category, posts: posts.filter((p) => p.data.categories.includes(category)) },
+  }));
+}) satisfies GetStaticPaths;
+
+const { category, posts } = Astro.props;
+---
+<Base title={`${CATEGORIES[category].label} posts`}>
+  <CategoryBar active={category} />
+  <section class="flex w-full max-w-[825px] flex-col gap-4">
+    {posts.length ? posts.map((post) => <PostCard post={post} />) : <p class="text-center text-gray-light">Nothing here yet.</p>}
+  </section>
+</Base>

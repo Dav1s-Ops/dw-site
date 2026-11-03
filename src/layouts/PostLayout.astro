@@ -1,0 +1,50 @@
+---
+import Base from './Base.astro';
+import '@/styles/prose.css';
+import type { Post } from '@/lib/posts';
+import { formatDate, tagSlug } from '@/lib/posts';
+import { CATEGORIES } from '@/lib/categories';
+
+interface Props { post: Post }
+const { post } = Astro.props;
+const { title, description, pubDate, updatedDate, categories, tags } = post.data;
+---
+<Base title={title} description={description}>
+  <article class="w-full max-w-[980px] rounded-xl border border-gray bg-ink-panel px-5 py-8 shadow-md sm:px-8 md:p-12">
+    <header class="mb-8 flex flex-col items-center gap-3 text-center">
+      <h1 class="font-display text-[clamp(1.75rem,5vw,2.25rem)] font-medium break-words text-smoke">{title}</h1>
+      <p class="font-display text-sm font-light text-electro-green md:text-base">
+        <time datetime={pubDate.toISOString()}>{formatDate(pubDate)}</time>
+        {updatedDate && <span class="text-gray-light"> · updated {formatDate(updatedDate)}</span>}
+      </p>
+      <ul class="flex flex-wrap justify-center gap-2">
+        {categories.map((c) => (
+          <li><a href={`/blog/category/${c}`} class={`inline-flex rounded-full px-3 py-1 font-display text-xs text-ink-0 transition hover:-translate-y-0.5 ${CATEGORIES[c].bg}`}>{CATEGORIES[c].label}</a></li>
+        ))}
+        {tags.map((t) => (
+          <li><a href={`/blog/tags/${tagSlug(t)}`} class="inline-flex rounded-full border border-gray px-3 py-1 font-display text-xs font-light hover:border-electro-green">#{t}</a></li>
+        ))}
+      </ul>
+    </header>
+    <div class="post-body" data-pagefind-body><slot /></div>
+  </article>
+    <dialog id="lightbox" class="m-auto max-h-[90dvh] max-w-[95vw] bg-transparent p-0 backdrop:bg-black/85">
+        <img alt="" class="max-h-[90dvh] max-w-[95vw] rounded-xl object-contain" />
+    </dialog>
+</Base>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const dialog = document.querySelector<HTMLDialogElement>('#lightbox');
+    const big = dialog?.querySelector('img');
+    if (!dialog || !big) return;
+    document.querySelectorAll<HTMLImageElement>('.post-body img[data-lightbox]').forEach((img) => {
+      img.addEventListener('click', () => {
+        big.src = img.currentSrc || img.src;
+        big.alt = img.alt;
+        dialog.showModal();
+      });
+    });
+    dialog.addEventListener('click', () => dialog.close());
+  });
+</script>

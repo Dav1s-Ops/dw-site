@@ -1,0 +1,20 @@
+@reference "./global.css"
+
+.post-body { @apply flex flex-col gap-2.5 font-sans text-base font-light leading-[1.8] text-smoke; }
+.post-body :where(h1, h2, h3, h4, h5, h6) { @apply font-sans font-bold; }
+.post-body h1 { @apply mt-9 text-[2rem] text-electro-green; }
+.post-body h2 { @apply mt-9 text-[1.75rem] text-electro-blue; }
+.post-body h3 { @apply mt-4 text-2xl text-electro-green; }
+.post-body h4 { @apply mt-4 text-xl text-electro-yellow; }
+.post-body h5 { @apply mt-4 text-base text-electro-pink; }
+.post-body h6 { @apply mt-4 text-base text-electro-purple; }
+.post-body a { @apply text-electro-blue underline underline-offset-4 hover:text-electro-green; }
+.post-body ul { @apply ml-5 list-disc pl-5; }
+.post-body ol { @apply ml-5 list-decimal pl-5; }
+.post-body blockquote { @apply border-l-4 border-electro-green bg-ink-radial px-5 py-3 italic; }
+.post-body hr { @apply my-6 border-gray; }
+.post-body :not(pre) > code { @apply rounded-sm bg-[rgb(50_50_50/0.8)] px-1.5 py-0.5 font-mono text-[0.8rem] text-electro-yellow; }
+.post-body table { @apply block w-full overflow-x-auto rounded-md border border-gray text-sm; }
+.post-body th, .post-body td { @apply border border-gray px-3 py-2; }
+.post-body th { @apply bg-ink-rise font-display text-xs font-normal; }
+.post-body img { @apply mx-auto h-auto max-w-full cursor-zoom-in rounded-xl border border-gray; }

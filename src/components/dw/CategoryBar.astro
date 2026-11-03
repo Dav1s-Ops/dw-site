@@ -1,0 +1,31 @@
+---
+import { CATEGORIES, type Category } from '@/lib/categories';
+import { cn } from '@/lib/utils';
+
+interface Props { active?: Category }
+const { active } = Astro.props;
+---
+<nav aria-label="Categories" class="w-full max-w-[825px] overflow-hidden rounded-xl border border-gray">
+  <h2 class="bg-ink-radial py-2 text-center font-display text-base font-semibold tracking-wide shadow-lg">
+    {active ? `${CATEGORIES[active].label} Posts` : 'All Posts'}
+  </h2>
+  <ul class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6">
+    {Object.entries(CATEGORIES).map(([key, c]) => {
+      const isActive = key === active;
+      return (
+        <li>
+          <a
+            href={isActive ? '/blog' : `/blog/category/${key}`}
+            aria-current={isActive ? 'page' : undefined}
+            class={cn(
+              'flex h-11 items-center justify-center px-3 font-display text-xs font-light transition-colors',
+              isActive ? c.bg : c.hover,
+            )}
+          >
+            {c.label}
+          </a>
+        </li>
+      );
+    })}
+  </ul>
+</nav>
