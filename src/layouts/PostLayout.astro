@@ -28,4 +28,23 @@ const { title, description, pubDate, updatedDate, categories, tags } = post.data
     </header>
     <div class="post-body"><slot /></div>
   </article>
+    <dialog id="lightbox" class="m-auto max-h-[90dvh] max-w-[95vw] bg-transparent p-0 backdrop:bg-black/85">
+        <img alt="" class="max-h-[90dvh] max-w-[95vw] rounded-xl object-contain" />
+    </dialog>
 </Base>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const dialog = document.querySelector<HTMLDialogElement>('#lightbox');
+    const big = dialog?.querySelector('img');
+    if (!dialog || !big) return;
+    document.querySelectorAll<HTMLImageElement>('.post-body img[data-lightbox]').forEach((img) => {
+      img.addEventListener('click', () => {
+        big.src = img.currentSrc || img.src;
+        big.alt = img.alt;
+        dialog.showModal();
+      });
+    });
+    dialog.addEventListener('click', () => dialog.close());
+  });
+</script>

@@ -7,6 +7,7 @@ import sitemap from '@astrojs/sitemap';
 import { unified } from "@astrojs/markdown-remark";
 import rehypeExternalLinks from "rehype-external-links";
 import expressiveCode from 'astro-expressive-code';
+import rehypeLightbox from './src/plugins/rehype-lightbox.ts';
 
 // https://astro.build/config
 export default defineConfig({
@@ -33,10 +34,11 @@ export default defineConfig({
     optimizeDeps: { include: ['nanostores', '@nanostores/react'] },
     ssr: { optimizeDeps: { include: ['nanostores', '@nanostores/react'] } },
   },
-    markdown: {
+  markdown: {
     processor: unified({
       rehypePlugins: [
         [rehypeExternalLinks, { target: '_blank', rel: ['noopener', 'noreferrer'] }],
+        rehypeLightbox,
       ],
     }),
   },
