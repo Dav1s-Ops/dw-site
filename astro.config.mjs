@@ -8,6 +8,7 @@ import { unified } from "@astrojs/markdown-remark";
 import rehypeExternalLinks from "rehype-external-links";
 import expressiveCode from 'astro-expressive-code';
 import rehypeLightbox from './src/plugins/rehype-lightbox.ts';
+import pagefind from 'astro-pagefind';
 
 // https://astro.build/config
 export default defineConfig({
@@ -24,6 +25,7 @@ export default defineConfig({
     }),
     react(),
     sitemap(),
+    pagefind(),
   ],
   adapter: cloudflare({imageService: 'compile'}),
   image: { layout: 'constrained'},
