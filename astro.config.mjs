@@ -6,11 +6,24 @@ import cloudflare from '@astrojs/cloudflare';
 import sitemap from '@astrojs/sitemap';
 import { unified } from "@astrojs/markdown-remark";
 import rehypeExternalLinks from "rehype-external-links";
+import expressiveCode from 'astro-expressive-code';
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://dw-code-blog.dev',
-  integrations: [react(), sitemap()],
+  integrations: [
+    expressiveCode({
+      themes: ['github-dark-default'],
+      styleOverrides: {
+        borderColor: '#363636',
+        borderRadius: '6px',
+        codeFontFamily: "'B612 Mono', monospace",
+        frames: { editorTabBarBackground: '#333', terminalTitlebarBackground: '#333' },
+      },
+    }),
+    react(),
+    sitemap(),
+  ],
   adapter: cloudflare({imageService: 'compile'}),
   image: { layout: 'constrained'},
   // No Astro.session usage; stops the adapter injecting an unconfigured SESSION KV binding
