@@ -18,6 +18,7 @@
     "@astrojs/cloudflare": "^14.4.3",
     "@astrojs/markdown-remark": "^7.3.5",
     "@astrojs/react": "^7.1.1",
+    "@astrojs/rss": "^4.0.19",
     "@astrojs/sitemap": "^3.7.4",
     "@fontsource-variable/open-sans": "^5.3.0",
     "@fontsource-variable/unbounded": "^5.3.0",
