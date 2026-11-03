@@ -1,0 +1,17 @@
+- id: personal-blog
+  title: Personal Blog
+  stack: Ruby on Rails
+  image: ../assets/projects/personal-blog.png
+  order: 1
+  links:
+    - { label: Website, href: "https://dw-blog-v3.fly.dev/" }
+    - { label: Code, href: "https://github.com/Dav1s-Ops/dw-blog-v3" }
+- id: whether-sweater
+  title: Whether Sweater
+  stack: React // Ruby on Rails
+  image: ../assets/projects/whether-sweater.png
+  order: 2
+  links:
+    - { label: Website, href: "https://whether-sweater-fe.vercel.app/" }
+    - { label: Frontend, href: "https://github.com/Dav1s-Ops/whether-sweater-fe" }
+    - { label: Backend, href: "https://github.com/Dav1s-Ops/whether_sweater_api" }

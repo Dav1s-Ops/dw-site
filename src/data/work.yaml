@@ -1,0 +1,15 @@
+- id: sonepar
+  title: Full Stack Software Engineer
+  company: Sonepar US
+  website: https://www.soneparusa.com/us-en/
+  start: 2026-02-01
+  summary: Contributing to the Digital Factory omnichannel platform.
+  stack: [C#, .NET, MongoDB, GCP, Azure, Kubernetes]
+- id: calance
+  title: Software Engineer
+  company: Calance
+  website: https://www.calanceus.com/
+  start: 2025-10-01
+  end: 2026-02-01
+  summary: Developed RPA tools using .NET Playwright & Selenium.
+  stack: [C#, .NET, Linux, AWS]
