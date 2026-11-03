@@ -28,7 +28,10 @@ export default defineConfig({
     pagefind(),
   ],
   adapter: cloudflare({imageService: 'compile'}),
-  image: { layout: 'constrained'},
+  image: {
+    layout: 'constrained',
+    remotePatterns: [{ protocol: 'https', hostname: 'img.dav1s.dev' }],
+  },
   // No Astro.session usage; stops the adapter injecting an unconfigured SESSION KV binding
   session: false,
   vite: {
