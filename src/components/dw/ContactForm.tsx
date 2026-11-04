@@ -8,7 +8,7 @@ export function ContactForm() {
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
   const [message, setMessage] = useState('');
 
-  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: React.SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
     setStatus('sending');
     const { error } = await actions.contact(new FormData(e.currentTarget));
@@ -22,20 +22,20 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="flex w-full max-w-xl flex-col gap-4 rounded-xl border border-gray bg-ink-panel p-5 sm:p-8">
-      <label className="flex flex-col gap-1.5 font-display text-xs">
-        Your email
-        <input name="email" type="email" required autoComplete="email" className="h-11 rounded-md border border-gray bg-ink-0 px-3 font-sans text-base focus:border-electro-green focus:outline-none" />
+    <form onSubmit={onSubmit} className="flex w-full max-w-xl flex-col gap-4 rounded-xl border border-gray bg-ink-spot p-5 sm:p-8">
+      <label className="flex flex-col gap-1.5 font-sans text-sm">
+        Email
+        <input name="email" type="email" required autoComplete="email" className="h-11 rounded-md border border-gray bg-ink-0 px-3 font-mono text-sm focus:border-electro-green focus:outline-none" />
       </label>
-      <label className="flex flex-col gap-1.5 font-display text-xs">
+      <label className="flex flex-col gap-1.5 font-sans text-sm">
         Message
-        <textarea name="message" required minLength={10} rows={6} className="rounded-md border border-gray bg-ink-0 p-3 font-sans text-base focus:border-electro-green focus:outline-none" />
+        <textarea name="message" required minLength={10} rows={6} className="h-80 rounded-md border border-gray bg-ink-0 p-3 font-mono text-sm focus:border-electro-green focus:outline-none" />
       </label>
-      <label className="flex items-center gap-2 text-sm font-light">
+      {/* <label className="flex items-center gap-2 text-sm font-light">
         <input name="sendCopy" type="checkbox" className="size-5 accent-electro-green" /> Send me a copy
-      </label>
+      </label> */}
       {/* Adds a hidden cf-turnstile-response input to the form */}
-      <Turnstile siteKey={PUBLIC_TURNSTILE_SITE_KEY} options={{ theme: 'dark', size: 'flexible' }} />
+      <Turnstile siteKey={PUBLIC_TURNSTILE_SITE_KEY} options={{ theme: 'dark', size: 'flexible', appearance: 'interaction-only' }} />
       <SoundButton type="submit" variant="electro" size="touch" disabled={status === 'sending'}>
         {status === 'sending' ? 'Sending…' : 'Send'}
       </SoundButton>
