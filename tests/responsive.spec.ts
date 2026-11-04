@@ -1,7 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-const pages = ['/', '/styleguide', '/blog', '/blog/hello-world', '/blog/category/fullstack', '/blog/tags/astro'];
-
+const pages = ['/', '/styleguide', '/blog', '/blog/hello-world', '/blog/category/fullstack', '/blog/tags/astro', '/work', '/projects', '/contact'];
 for (const path of pages) {
   test(`${path} has no horizontal scroll`, async ({ page }) => {
     await page.goto(path);
