@@ -1,0 +1,20 @@
+---
+import { getCollection } from 'astro:content';
+import { getImage } from 'astro:assets';
+import Base from '@/layouts/Base.astro';
+import { ProjectCard } from '@/components/portfolio/ProjectCard';
+
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+const cards = await Promise.all(
+  projects.map(async (p) => {
+    const img = await getImage({ src: p.data.image, width: 800, format: 'webp' });
+    return { ...p.data, image: { src: img.src, width: 800, height: Math.round((800 / p.data.image.width) * p.data.image.height) } };
+  }),
+);
+---
+<Base title="Projects">
+  <h1 class="font-display text-3xl font-semibold">Projects</h1>
+  <div class="grid w-full gap-6 sm:grid-cols-2">
+    {cards.map((c) => <ProjectCard client:visible {...c} />)}
+  </div>
+</Base>

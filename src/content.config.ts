@@ -1,5 +1,5 @@
 import { defineCollection } from 'astro:content';
-import { glob } from 'astro/loaders';
+import { glob, file } from 'astro/loaders';
 import { z } from "astro/zod";
 import { CATEGORY_KEYS } from "./lib/categories";
 
@@ -18,4 +18,29 @@ const posts = defineCollection({
         }),
 });
 
-export const collections = { posts };
+const work = defineCollection({
+    loader: file('src/data/work.yaml'),
+    schema: z.object({
+        title: z.string(),
+        company: z.string(),
+        website: z.url().optional(),
+        start: z.coerce.date(),
+        end: z.coerce.date().optional(), // omit = current
+        summary: z.string(),
+        stack: z.array(z.string()),
+    }),
+});
+
+const projects = defineCollection({
+  loader: file('src/data/projects.yaml'),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      stack: z.string(),
+      image: image(),
+      order: z.number(),
+      links: z.array(z.object({ label: z.string(), href: z.url() })),
+    }),
+});
+
+export const collections = { posts, projects, work };

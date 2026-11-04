@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig, envField } from 'astro/config';
 import react from '@astrojs/react';
 import tailwindcss from '@tailwindcss/vite';
 import cloudflare from '@astrojs/cloudflare';
@@ -34,6 +34,13 @@ export default defineConfig({
   },
   // No Astro.session usage; stops the adapter injecting an unconfigured SESSION KV binding
   session: false,
+  env: {
+    schema: {
+      RESEND_API_KEY: envField.string({ context: 'server', access: 'secret' }),
+      TURNSTILE_SECRET_KEY: envField.string({ context: 'server', access: 'secret' }),
+      PUBLIC_TURNSTILE_SITE_KEY: envField.string({ context: 'client', access: 'public' }),
+    },
+  },
   vite: {
     plugins: [tailwindcss()],
     optimizeDeps: { include: ['nanostores', '@nanostores/react'] },
